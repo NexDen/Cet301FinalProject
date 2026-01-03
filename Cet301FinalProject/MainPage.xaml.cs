@@ -1,23 +1,39 @@
-﻿namespace Cet301FinalProject;
+﻿using Cet301FinalProject.Data;
+using Cet301FinalProject.Data.Entities;
+using Cet301FinalProject.Data.Repositories;
+
+namespace Cet301FinalProject;
 
 public partial class MainPage : ContentPage
 {
-    int count = 0;
-
-    public MainPage()
+    
+    private IRepository<Address> _addressRepository;
+    private IRepository<Admin> _adminRepository;
+    private IRepository<Company> _companyRepository;
+    private IRepository<Document> _documentRepository;
+    private IRepository<Driver> _driverRepository;
+    private IRepository<TransportationJob> _transportationJobRepository;
+    private IRepository<Vehicle> _vehicleRepository;
+    public MainPage(
+        IRepository<Address> addressRepository, IRepository<Admin> adminRepository, IRepository<Company> companyRepository,
+        IRepository<Document> documentRepository, IRepository<Driver> driverRepository, IRepository<TransportationJob> transportationJobRepository,
+        IRepository<Vehicle> vehicleRepository
+        )
     {
+        _addressRepository = addressRepository;
+        _adminRepository = adminRepository;
+        _companyRepository = companyRepository;
+        _documentRepository = documentRepository;
+        _driverRepository = driverRepository;
+        _transportationJobRepository = transportationJobRepository;
+        _vehicleRepository = vehicleRepository;
         InitializeComponent();
     }
 
-    private void OnCounterClicked(object? sender, EventArgs e)
+    public void LoadValue(object? sender, EventArgs eventArgs)
     {
-        count++;
-
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
+        var selected = _adminRepository.GetAllAsync().Result.First();
+        TestText.Text = selected?.Name ?? "No admin";
     }
+
 }

@@ -1,7 +1,11 @@
-namespace Cet301FinalProject.Data;
+using SQLite;
 
+namespace Cet301FinalProject.Data.Entities;
+
+[Table("transportation_jobs")]
 public class TransportationJob
 {
+    [PrimaryKey]
     public string Id { get; set; }
     public Admin CreatedBy { get; set; }
     public string CreatedById { get; set; }

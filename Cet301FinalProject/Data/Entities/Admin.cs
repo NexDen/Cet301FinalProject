@@ -1,7 +1,11 @@
-namespace Cet301FinalProject.Data;
+using SQLite;
 
+namespace Cet301FinalProject.Data.Entities;
+
+[Table("admins")]
 public class Admin
 {
+    [PrimaryKey]
     public string Id { get; set; }
     public Company Company { get; set; }
     public string CompanyId { get; set; }

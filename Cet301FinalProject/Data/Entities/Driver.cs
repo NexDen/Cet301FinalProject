@@ -1,7 +1,10 @@
-namespace Cet301FinalProject.Data;
+namespace Cet301FinalProject.Data.Entities;
+using SQLite;
+[Table("drivers")]
 
 public class Driver
 {
+    [PrimaryKey]
     public string Id { get; set; }
     public Company Company { get; set; }
     public string CompanyId { get; set; }
