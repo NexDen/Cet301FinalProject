@@ -5,11 +5,43 @@
     x:Class="Cet301FinalProject.Pages.SettingsPage"
     Title="Settings">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout
+        Padding="24"
+        Spacing="20">
 
-        <Button
-            Text="Reload Vehicles and Drivers"
-            Clicked="ReloadData_Clicked" />
+        <Frame
+            Padding="16"
+            CornerRadius="14"
+            HasShadow="True"
+            BackgroundColor="{AppThemeBinding Light=White, Dark=#1F2937}">
+
+            <HorizontalStackLayout Spacing="12">
+                <Label
+                    Text="Dark Mode"
+                    VerticalOptions="Center"
+                    FontSize="16" />
+
+                <Switch
+                    x:Name="ThemeSwitch"
+                    HorizontalOptions="EndAndExpand"
+                    Toggled="ThemeSwitch_Toggled" />
+            </HorizontalStackLayout>
+        </Frame>
+        
+        <Frame
+            Padding="16"
+            CornerRadius="14"
+            HasShadow="True"
+            BackgroundColor="{AppThemeBinding Light=White, Dark=#1F2937}">
+
+            <VerticalStackLayout Spacing="12">
+
+                <Button
+                    Text="Reload Vehicles and Drivers"
+                    Clicked="ReloadData_Clicked" />
+
+            </VerticalStackLayout>
+        </Frame>
 
     </VerticalStackLayout>
 </ContentPage>

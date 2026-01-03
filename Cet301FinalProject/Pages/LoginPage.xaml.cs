@@ -34,7 +34,7 @@ public partial class LoginPage : ContentPage
 
         if (admin == null)
         {
-            await DisplayAlert("Error", "Invalid login", "OK");
+            await DisplayAlert("Error", "Username Or Password is Wrong!", "OK");
             return;
         }
 

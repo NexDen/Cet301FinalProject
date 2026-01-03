@@ -9,10 +9,10 @@ namespace CetTransportApp.Data;
 
 public class AppDatabase
 {
-    private SQLiteAsyncConnection _db;
+    private static SQLiteAsyncConnection _db;
 
     public static Admin ContextAdmin; 
-    private bool isInitialized = false;
+    private static bool isInitialized = false;
     
     private async Task InitAsync()
     {
@@ -27,24 +27,17 @@ public class AppDatabase
             using var stream = await FileSystem.OpenAppPackageFileAsync("transport.db");
             using var fileStream = File.Create(dbPath);
             await stream.CopyToAsync(fileStream);
-            _db = new SQLiteAsyncConnection(dbPath);
+            _db = new SQLiteAsyncConnection(dbPath, storeDateTimeAsTicks: false);
+            await _db.CreateTableAsync<Address>();
+            await _db.CreateTableAsync<Admin>();
+            await _db.CreateTableAsync<Company>();
+            await _db.CreateTableAsync<Document>();
+            await _db.CreateTableAsync<Driver>();
+            await _db.CreateTableAsync<TransportationJob>();
+            await _db.CreateTableAsync<Vehicle>();
             isInitialized = true;
         }
-        else
-        {
-            _db = new SQLiteAsyncConnection("transport.db");
-        }
-
-
-
-
-        await _db.CreateTableAsync<Address>();
-        await _db.CreateTableAsync<Admin>();
-        await _db.CreateTableAsync<Company>();
-        await _db.CreateTableAsync<Document>();
-        await _db.CreateTableAsync<Driver>();
-        await _db.CreateTableAsync<TransportationJob>();
-        await _db.CreateTableAsync<Vehicle>();
+        
     }
     
     public async Task<bool> CheckDatabaseConnection()
@@ -76,6 +69,16 @@ public class AppDatabase
         return admin;
     }
     
+    private static string GetAddressName(
+        Dictionary<string, Address> map,
+        string addressId)
+    {
+        return !string.IsNullOrWhiteSpace(addressId) &&
+               map.TryGetValue(addressId, out var address)
+            ? address.LocationName
+            : "N/A";
+    }
+    
     public async Task<List<JobListItem>> GetJobListForAdminAsync(string adminId)
     {
         await InitAsync();
@@ -86,14 +89,16 @@ public class AppDatabase
 
         var vehicles = await _db.Table<Vehicle>().ToListAsync();
         var drivers = await _db.Table<Driver>().ToListAsync();
-
+        var addresses = await _db.Table<Address>().ToListAsync();
+        
+        
         var vehicleMap = vehicles.ToDictionary(v => v.Id);
         var driverMap = drivers.ToDictionary(d => d.Id);
-
+        var addressMap = addresses.ToDictionary(a => a.Id);
+        
         return jobs.Select(j => new JobListItem
         {
-            JobId = j.Id,
-            OrderDate = j.OrderDate,
+            Job = j,
 
             VehicleDisplay = vehicleMap.TryGetValue(j.VehicleId, out var v)
                 ? $"{v.PlateNo} ({v.Model})"
@@ -101,7 +106,11 @@ public class AppDatabase
 
             DriverDisplay = driverMap.TryGetValue(j.DriverId, out var d)
                 ? $"{d.Name} {d.Surname}"
-                : "N/A"
+                : "N/A",
+            
+            LoadingUnloadingAddressDisplay =
+                $"{GetAddressName(addressMap, j.LoadingAddressId)} -> {GetAddressName(addressMap, j.UnloadingAddressId)}"
+
         }).ToList();
     }
     
@@ -123,6 +132,19 @@ public class AppDatabase
     public async Task<List<TransportationJob>> GetJobsAsync()
     {
         await InitAsync();
-        return await _db.Table<TransportationJob>().ToListAsync();
+        return await _db.Table<TransportationJob>().Where(tj => tj.IsActive).ToListAsync();
     }
+    
+    public async Task UpdateJobAsync(TransportationJob job)
+    {
+        await InitAsync();
+        await _db.UpdateAsync(job);
+    }
+    
+    public async Task CreateAddressAsync(Address address)
+    {
+        await InitAsync();
+        await _db.InsertAsync(address);
+    }
+
 }

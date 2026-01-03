@@ -3,8 +3,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-    x:Class="Cet301FinalProject.Pages.CreateJobPage"
-    Title="Create Job">
+    x:Class="Cet301FinalProject.Pages.EditJobPage"
+    Title="Edit Job">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="12">
@@ -33,14 +33,6 @@
             <Entry
                 x:Name="SaleCostEntry"
                 Keyboard="Numeric" />
-            
-            <Label Text="Loading Address" />
-            <Entry
-                x:Name="LoadingAddressEntry" />
-            
-            <Label Text="Unloading Address" />
-            <Entry
-                x:Name="UnloadingAddressEntry"/>
 
             <Label Text="Order Date" />
             <DatePicker x:Name="OrderDatePicker" />
@@ -54,8 +46,8 @@
             </HorizontalStackLayout>
 
             <Button
-                Text="Create Job"
-                Clicked="CreateButton_Clicked" />
+                Text="Save Changes"
+                Clicked="SaveButton_Clicked" />
 
         </VerticalStackLayout>
     </ScrollView>

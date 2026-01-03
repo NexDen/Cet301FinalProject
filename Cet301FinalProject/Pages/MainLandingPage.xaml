@@ -3,34 +3,89 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Cet301FinalProject.Pages.MainLandingPage"
+    BackgroundColor= "{AppThemeBinding Light=White, Dark=#1f1e33}"
     Title="Main Menu">
 
-    <VerticalStackLayout
-        Padding="30"
-        Spacing="20"
-        VerticalOptions="Center">
+    <Grid RowDefinitions="Auto,*"
+          Padding="24">
 
-        <Label
-            x:Name="AdminNameLabel"
-            FontSize="18"
-            HorizontalOptions="Center" />
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="6">
 
-        <Button
-            Text="View My Jobs"
-            Clicked="JobsButton_Clicked" />
+            <Label
+                Text="CeTransport"
+                FontSize="72"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#222222, Dark=#dddddd}"
+                HorizontalOptions="Center" />
 
-        <Button
-            Text="Create New Job"
-            Clicked="CreateJobButton_Clicked" />
+            <Label
+                Text="Management Panel"
+                FontSize="18"
+                TextColor="{AppThemeBinding Light=#333333, Dark=#cccccc}"
 
-        <Button
-            Text="Settings"
-            Clicked="SettingsButton_Clicked" />
+                HorizontalOptions="Center" />
 
-        <Button
-            Text="Logout"
-            TextColor="Red"
-            Clicked="LogoutButton_Clicked" />
+            <Label
+                x:Name="AdminNameLabel"
+                FontSize="14"
+                TextColor="#696969"
+                HorizontalOptions="Center"
+                Margin="0,12,0,0" />
+        </VerticalStackLayout>
 
-    </VerticalStackLayout>
+        <VerticalStackLayout
+            Grid.Row="1"
+            Spacing="16"
+            VerticalOptions="Center">
+
+            <Frame
+                CornerRadius="16"
+                Padding="16"
+                HasShadow="True"
+                BackgroundColor="#787878">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Button
+                        Text="View My Jobs"
+                        HeightRequest="50"
+                        BackgroundColor="#2563EB"
+                        TextColor="White"
+                        CornerRadius="12"
+                        Clicked="JobsButton_Clicked" />
+
+                    <Button
+                        Text="Create New Job"
+                        HeightRequest="50"
+                        BackgroundColor="#10B981"
+                        TextColor="White"
+                        CornerRadius="12"
+                        Clicked="CreateJobButton_Clicked" />
+
+                    <Button
+                        Text="Settings"
+                        HeightRequest="50"
+                        BackgroundColor="#E5E7EB"
+                        TextColor="#111827"
+                        CornerRadius="12"
+                        Clicked="SettingsButton_Clicked" />
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button
+                Text="Logout"
+                HeightRequest="48"
+                BackgroundColor="Transparent"
+                TextColor="#DC2626"
+                BorderColor="#DC2626"
+                BorderWidth="1"
+                CornerRadius="12"
+                Clicked="LogoutButton_Clicked" />
+
+        </VerticalStackLayout>
+
+    </Grid>
 </ContentPage>

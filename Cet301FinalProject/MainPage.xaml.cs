@@ -8,7 +8,7 @@ public partial class MainPage : ContentPage
     
     public MainPage()
     {
-        Shell.Current.GoToAsync(nameof(LoginPage));
+        Navigation.PushAsync(new LoginPage());
         InitializeComponent();
     }
 

@@ -12,10 +12,9 @@ public partial class MainLandingPage : ContentPage
     {
         InitializeComponent();
         _admin = admin;
-        AdminNameLabel.Text = $"Logged in as {_admin.Name} {_admin.Surname}";
+        AdminNameLabel.Text = $"Welcome, {_admin.Name} {_admin.Surname}!";
     }
-
-    +
+    
     public async void JobsButton_Clicked(object sender, EventArgs e)
         => await Navigation.PushAsync(new JobsListPage(_admin));
 

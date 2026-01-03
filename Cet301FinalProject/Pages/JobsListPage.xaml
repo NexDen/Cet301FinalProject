@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:entities="clr-namespace:Cet301FinalProject.Data.Entities"
     x:Class="Cet301FinalProject.Pages.JobsListPage"
+    BackgroundColor= "{AppThemeBinding Light=White, Dark=#1f1e33}"
     Title="My Jobs">
 
     <VerticalStackLayout Padding="20" Spacing="10">
@@ -15,19 +16,23 @@
 
         <CollectionView
             x:Name="JobsView"
-            HeightRequest="400"
-            SelectionMode="None">
+            SelectionMode="None"
+            MaximumHeightRequest="600">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="entities:JobListItem">
-                    <Frame Padding="10" Margin="5" BackgroundColor="#0f0f0f">
+                    <Frame Padding="10" Margin="5" BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#444}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="JobItem_Tapped"
+                                CommandParameter="{Binding}" />
+                        </Frame.GestureRecognizers>
+
                         <VerticalStackLayout>
-                            <Label Text="{Binding OrderDate}"
-                                   FontAttributes="Bold" />
-                            <Label Text="Vehicle:" FontSize="12" />
+                            <Label Text="{Binding LoadingUnloadingAddressDisplay}" FontAttributes="Bold" />
                             <Label Text="{Binding VehicleDisplay}" FontSize="12" />
-                            <Label Text="Driver:" FontSize="12" />
                             <Label Text="{Binding DriverDisplay}" FontSize="12" />
+                            <Label Text="{Binding OrderDate}" FontSize="12" />
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
