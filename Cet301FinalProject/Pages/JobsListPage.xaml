@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:entities="clr-namespace:Cet301FinalProject.Data.Entities"
+    x:Class="Cet301FinalProject.Pages.JobsListPage"
+    Title="My Jobs">
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Entry
+            x:Name="SearchEntry"
+            Placeholder="Filter by Vehicle ID"
+            TextChanged="SearchEntry_TextChanged" />
+
+        <CollectionView
+            x:Name="JobsView"
+            HeightRequest="400"
+            SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="entities:JobListItem">
+                    <Frame Padding="10" Margin="5" BackgroundColor="#0f0f0f">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding OrderDate}"
+                                   FontAttributes="Bold" />
+                            <Label Text="Vehicle:" FontSize="12" />
+                            <Label Text="{Binding VehicleDisplay}" FontSize="12" />
+                            <Label Text="Driver:" FontSize="12" />
+                            <Label Text="{Binding DriverDisplay}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Button
+            Text="Refresh"
+            Clicked="RefreshButton_Clicked" />
+
+    </VerticalStackLayout>
+</ContentPage>

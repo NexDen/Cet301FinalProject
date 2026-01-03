@@ -12,7 +12,7 @@ public partial class App : Application
     protected override async void OnStart()
     {
         var db = new AppDatabase();
-        var ok = await db.SanityCheckAsync();
+        var ok = await db.CheckDatabaseConnection();
 
         if (!ok)
         {
@@ -20,7 +20,7 @@ public partial class App : Application
             {
                 Content = new Label
                 {
-                    Text = "Database failed to load.",
+                    Text = "Database connection error",
                     TextColor = Colors.Red,
                     HorizontalOptions = LayoutOptions.Center,
                     VerticalOptions = LayoutOptions.Center

@@ -38,7 +38,7 @@ public partial class LoginPage : ContentPage
             return;
         }
 
-        await Navigation.PushAsync(new JobManagementPage());
+        await Navigation.PushAsync(new MainLandingPage(admin));
     }
 }
 

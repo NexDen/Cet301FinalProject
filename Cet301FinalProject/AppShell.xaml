@@ -20,7 +20,7 @@
         ></ShellContent>
         <ShellContent
             Title="Products"
-            ContentTemplate="{DataTemplate pages:JobManagementPage}"
+            ContentTemplate="{DataTemplate pages:MainLandingPage}"
             Route="ProductsPage"
         ></ShellContent>
     </TabBar>
