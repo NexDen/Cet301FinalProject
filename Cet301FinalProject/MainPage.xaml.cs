@@ -1,4 +1,7 @@
-﻿namespace Cet301FinalProject;
+﻿using Cet301FinalProject.Pages;
+using CetTransportApp.Data;
+
+namespace Cet301FinalProject;
 
 public partial class MainPage : ContentPage
 {
@@ -8,9 +11,11 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
-    public void LoadValue(object? sender, EventArgs eventArgs)
+    private AppDatabase _db = new AppDatabase();
+    
+    public async void LoadValue(object? sender, EventArgs eventArgs)
     {
-        TestText.Text = "merhaba!";
+        await Shell.Current.GoToAsync(nameof(LoginPage));
     }
 
 }

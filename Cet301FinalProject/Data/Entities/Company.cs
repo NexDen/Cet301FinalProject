@@ -5,5 +5,6 @@ public class Company
 {
     [PrimaryKey]
     public string Id { get; init; }
+    [Column("name")]
     public string Name { get; init; }
 }

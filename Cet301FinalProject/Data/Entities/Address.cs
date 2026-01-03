@@ -5,7 +5,10 @@ public class Address
 {
     [PrimaryKey]
     public string Id { get; set; }
+    [Column("location_name")]
     public string LocationName { get; set; }
-    public float Latitude { get; set; }
-    public float Longitude { get; set; }
+    [Column("latitude")]
+    public double Latitude { get; set; }
+    [Column("longitude")]
+    public double Longitude { get; set; }
 }

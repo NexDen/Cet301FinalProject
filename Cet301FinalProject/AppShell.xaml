@@ -4,11 +4,25 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Cet301FinalProject"
+    xmlns:pages="clr-namespace:Cet301FinalProject.Pages"
     Title="Cet301FinalProject">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Main Page"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage"
+        ></ShellContent>
+        <ShellContent
+            Title="Customers"
+            ContentTemplate="{DataTemplate pages:LoginPage}"
+            Route="CustomersPage"
+        ></ShellContent>
+        <ShellContent
+            Title="Products"
+            ContentTemplate="{DataTemplate pages:JobManagementPage}"
+            Route="ProductsPage"
+        ></ShellContent>
+    </TabBar>
 
 </Shell>
