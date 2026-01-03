@@ -37,7 +37,7 @@ public partial class JobsListPage : ContentPage
         }
 
         JobsView.ItemsSource = _allJobs
-            .Where(j => j.VehicleDisplay.Contains(e.NewTextValue, StringComparison.CurrentCultureIgnoreCase));
+            .Where(j => j.DriverDisplay.Contains(e.NewTextValue, StringComparison.CurrentCultureIgnoreCase));
     }
 
     private async void JobItem_Tapped(object sender, EventArgs e)
