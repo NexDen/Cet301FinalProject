@@ -13,6 +13,22 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        var rememberedAdminId =
+            Preferences.Get("remember_admin_id", null);
+
+        if (!string.IsNullOrEmpty(rememberedAdminId))
+        {
+            var admin = await _db.GetAdminByIdAsync(rememberedAdminId);
+            await Navigation.PushAsync(new MainLandingPage(admin));
+        }
+
+    }
+
+    
     private static string Sha256Hex(string input)
     {
         using var sha256 = SHA256.Create();
@@ -24,8 +40,7 @@ public partial class LoginPage : ContentPage
     private async void LoginButton_Clicked(object sender, EventArgs e)
     {
         var passwordHash = Sha256Hex(PasswordEntry.Text);
-
-        var burak = await _db.GetJobsAsync();
+        
         
         var admin = await _db.LoginAsync(
             UsernameEntry.Text,
@@ -34,8 +49,17 @@ public partial class LoginPage : ContentPage
 
         if (admin == null)
         {
-            await DisplayAlert("Error", "Username Or Password is Wrong!", "OK");
+            await DisplayAlert("Error", "Username or Password is Wrong!", "OK");
             return;
+        }
+
+        if (RememberCheckbox.IsChecked)
+        {
+            Preferences.Set("remember_admin_id", admin.Id);
+        }
+        else
+        {
+            Preferences.Remove("remember_admin_id");
         }
 
         await Navigation.PushAsync(new MainLandingPage(admin));

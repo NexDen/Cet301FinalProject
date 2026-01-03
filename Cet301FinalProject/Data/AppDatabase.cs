@@ -135,6 +135,12 @@ public class AppDatabase
         return await _db.Table<TransportationJob>().Where(tj => tj.IsActive).ToListAsync();
     }
     
+    public async Task<Admin> GetAdminByIdAsync(string id)
+    {
+        await InitAsync();
+        return await _db.Table<Admin>().Where(a => a.Id == id).FirstOrDefaultAsync();
+    }
+    
     public async Task UpdateJobAsync(TransportationJob job)
     {
         await InitAsync();

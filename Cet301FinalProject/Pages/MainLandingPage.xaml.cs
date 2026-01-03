@@ -25,5 +25,8 @@ public partial class MainLandingPage : ContentPage
         => await Navigation.PushAsync(new SettingsPage(_admin));
 
     public async void LogoutButton_Clicked(object sender, EventArgs e)
-        => await Navigation.PopToRootAsync();
+    {
+        Preferences.Remove("remember_admin_id");
+        await Navigation.PopToRootAsync();
+    }
 }

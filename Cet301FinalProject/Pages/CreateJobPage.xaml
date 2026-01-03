@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:sys="clr-namespace:System;assembly=System.Runtime"
     x:Class="Cet301FinalProject.Pages.CreateJobPage"
+    BackgroundColor= "{AppThemeBinding Light=White, Dark=#1f1e33}"
     Title="Create Job">
 
     <ScrollView>

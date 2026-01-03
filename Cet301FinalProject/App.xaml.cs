@@ -12,22 +12,7 @@ public partial class App : Application
 
     protected override async void OnStart()
     {
-        var db = new AppDatabase();
-        var ok = await db.CheckDatabaseConnection();
-
-        if (!ok)
-        {
-            MainPage = new ContentPage
-            {
-                Content = new Label
-                {
-                    Text = "Database connection error",
-                    TextColor = Colors.Red,
-                    HorizontalOptions = LayoutOptions.Center,
-                    VerticalOptions = LayoutOptions.Center
-                }
-            };
-        }
+        
     }
 
     
