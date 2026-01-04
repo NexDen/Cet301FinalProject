@@ -29,4 +29,9 @@ public partial class MainLandingPage : ContentPage
         Preferences.Remove("remember_admin_id");
         await Navigation.PopToRootAsync();
     }
+    public async void AnalyticsButton_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new AnalyticsPage(_admin));
+    }
+
 }

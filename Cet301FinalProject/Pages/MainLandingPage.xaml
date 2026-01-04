@@ -49,6 +49,14 @@
                 <VerticalStackLayout Spacing="12">
 
                     <Button
+                        Text="Job Analytics"
+                        HeightRequest="50"
+                        BackgroundColor="#125343"
+                        TextColor="White"
+                        CornerRadius="12"
+                        Clicked="AnalyticsButton_Clicked" />
+                    
+                    <Button
                         Text="View My Jobs"
                         HeightRequest="50"
                         BackgroundColor="#2563EB"

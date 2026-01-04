@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Cet301FinalProject.Pages.AnalyticsPage"
+    Title="Analytics"
+    BackgroundColor= "{AppThemeBinding Light=White, Dark=#1f1e33}"
+    >
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
+
+            <Label
+                Text="Job Summary"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#333333, Dark=#cccccc}"
+            />
+
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="Auto,Auto"
+                  ColumnSpacing="16"
+                  RowSpacing="16">
+
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#444}"
+                    CornerRadius="12">
+
+                    <VerticalStackLayout>
+                        <Label Text="Total Jobs" />
+                        <Label x:Name="TotalJobsLabel"
+                               FontSize="22"
+                               FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#444}"
+                    CornerRadius="12">
+
+                    <VerticalStackLayout>
+                        <Label Text="Active Jobs" />
+                        <Label x:Name="ActiveJobsLabel"
+                               FontSize="22"
+                               FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#444}"
+                    CornerRadius="12">
+
+                    <VerticalStackLayout>
+                        <Label Text="Total Tonnage" />
+                        <Label x:Name="TonnageLabel"
+                               FontSize="22"
+                               FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#444}"
+                    CornerRadius="12">
+
+                    <VerticalStackLayout>
+                        <Label Text="Total Revenue" />
+                        <Label x:Name="RevenueLabel"
+                               FontSize="22"
+                               FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+
+            </Grid>
+
+
+            <Label
+                Text="Top Vehicles"
+                FontSize="18"
+                FontAttributes="Bold" />
+
+            <CollectionView x:Name="VehicleStatsView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding Name}" />
+                            <Label Text=": "></Label>
+                            <Label Text="{Binding Count}" HorizontalOptions="EndAndExpand" />
+                            <Label Text=" Trips"></Label>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label
+                Text="Top Drivers"
+                FontSize="18"
+                FontAttributes="Bold" />
+
+            <CollectionView x:Name="DriverStatsView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding Name}" />
+                            <Label Text=": "></Label>
+                            <Label Text="{Binding Count}" HorizontalOptions="EndAndExpand" />
+                            <Label Text=" Deliveries"></Label>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
